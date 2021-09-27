@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import data from './data';
 function App() {
   const [count, setCount] = useState(0);
-  const [text, useText] = useState([]);
+  const [text, setText] = useState([]);
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    console.log(e);
+    let amount = parseInt(count);
+    if (count <= 0) {
+      amount = 1;
+    }
+    if (count <= 8) {
+      amount = 8;
+    }
+
+    setText(data.slice(0, amount));
   };
 
   return (
@@ -26,13 +34,9 @@ function App() {
         </button>
       </form>
       <article className='lorem-text'>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, in!
-        </p>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque,
-          beatae.
-        </p>
+        {text.map((item, index) => {
+          return <p key={index}>{item}</p>;
+        })}
       </article>
     </section>
   );
